@@ -34,9 +34,15 @@ public class Student extends Person {
 
 		do {
 			System.out.println("Welches Fach wird belegt?");
-			enum_Kursname.printKursList();
-			System.out.println("[0] keinen Kurs belegen");
+			// enum_Kursname.printKursList(); -> wird in Fach selber gefragt
+
+			faecher_list.add(new Fach());
+
+			System.out.println("[0] kein Fach belegen");
 			auswahl = scanner.nextInt();
+			if (auswahl == 0) {
+				break;
+			}
 
 		} while (auswahl < 0 || auswahl > enum_Kursname.getList().size());
 

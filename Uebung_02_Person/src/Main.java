@@ -18,6 +18,7 @@ public class Main {
 
 		// alle enums werden in eine Liste gespeichert
 		enum_Kursname.addKursToList();
+		enum_Studiengang.addStudiengangToList();
 
 		Main main = new Main();
 		main.start();
@@ -77,11 +78,19 @@ public class Main {
 				do {
 					printList(studentenliste);
 					choice = scanner.nextInt();
-					
-					studentenliste.get(choice-1).addFach();
+
+					studentenliste.get(choice - 1).addFach();
 					// welchen kurs soll er wählen?
-					
-				} while(choice < 0 || choice > studentenliste.size());//Noch abfangen, dass es vom Typ int sein muss!
+
+				} while (choice < 0 || choice > studentenliste.size());// Noch
+																		// abfangen,
+																		// dass
+																		// es
+																		// vom
+																		// Typ
+																		// int
+																		// sein
+																		// muss!
 				userInput();
 				break;
 			}
