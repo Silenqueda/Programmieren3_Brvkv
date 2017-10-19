@@ -27,26 +27,13 @@ public class Student extends Person {
 		return scanner.next();
 	}
 
-	public Fach addFach() throws IllegalArgumentException {
+	public void addFach() throws IllegalArgumentException {
 		// TODO: darf keine doppelte Belegung beinhalten.
-		Scanner scanner = new Scanner(System.in);
-		int auswahl;
 
-		do {
-			System.out.println("Welches Fach wird belegt?");
-			// enum_Kursname.printKursList(); -> wird in Fach selber gefragt
+		System.out.println("Welches Fach wird belegt?");
+		// enum_Kursname.printKursList(); -> wird in Fach selber gefragt
 
-			faecher_list.add(new Fach());
-
-			System.out.println("[0] kein Fach belegen");
-			auswahl = scanner.nextInt();
-			if (auswahl == 0) {
-				break;
-			}
-
-		} while (auswahl < 0 || auswahl > enum_Kursname.getList().size());
-
-		return null;
+		faecher_list.add(new Fach());
 	}
 
 	public String toString() {
@@ -57,7 +44,7 @@ public class Student extends Person {
 		output += "Seminargruppe: " + this.seminargruppe + System.lineSeparator();
 
 		for (Object s : this.faecher_list) {
-			output += "\t" + s;
+			output +=s;
 		}
 		return output;
 	}

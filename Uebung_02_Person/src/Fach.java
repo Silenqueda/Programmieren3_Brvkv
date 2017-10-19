@@ -50,7 +50,7 @@ public class Fach {
 		int auswahl;
 		do {
 			System.out.println("Welcher Kurs soll belegt werden?");
-			enum_Kursname.getList();
+			enum_Kursname.printKursList();
 			auswahl = scanner.nextInt() - 1;
 
 		} while (auswahl < 0 || auswahl > enum_Kursname.getList().size());
@@ -68,7 +68,7 @@ public class Fach {
 			enum_Studiengang.printStudiengangList();
 			auswahl = scanner.nextInt() - 1;
 		} while (auswahl < 0 || auswahl > enum_Studiengang.getList().size());
-		this.studiengang = studiengang;
+		this.studiengang = enum_Studiengang.getList().get(auswahl);
 	}
 
 	public String toString() {

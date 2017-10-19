@@ -7,8 +7,8 @@ public class Main {
 	private static List<Student> studentenliste;
 
 	/**
-	 * TODO: Fächer eintragen lassen und semniargruppe eintragen lassen
-	 *
+	 * TODO: Wenn Studiengang gesetzt, kann kein weiterer gesetzt werden. Wenn
+	 * kurs bereits belegt kann der selbe nicht erneut gewählt werden
 	 */
 
 	public static void main(String[] args) {
