@@ -17,6 +17,10 @@ public class Student extends Person {
 
 	}
 
+	public List<Fach> getFaecher_list() {
+		return faecher_list;
+	}
+
 	private String addMatr_Nr() {
 		System.out.println("Enter your Matrikelnummer:");
 		return scanner.next();
@@ -33,8 +37,28 @@ public class Student extends Person {
 		System.out.println("Welches Fach wird belegt?");
 		// enum_Kursname.printKursList(); -> wird in Fach selber gefragt
 
-		faecher_list.add(new Fach());
+		// TODO!
+		// Fach f = new Fach();
+		//
+		// for (int i = 0; i < faecher_list.size(); i++) {
+		//
+		//
+		// if(faecher_list.get(i).getStudiengang() != null ) {
+		//
+		// }
+		// }
+		if (faecher_list.size() == 0) {
+			faecher_list.add(new Fach());
+		} else {
+			// Fach f = new Fach();
+			// f.setStudiengang(this.);
+			// if() {
+
+		}
+
 	}
+	
+	
 
 	public String toString() {
 		String output = "";
@@ -44,7 +68,7 @@ public class Student extends Person {
 		output += "Seminargruppe: " + this.seminargruppe + System.lineSeparator();
 
 		for (Object s : this.faecher_list) {
-			output +=s;
+			output += s;
 		}
 		return output;
 	}

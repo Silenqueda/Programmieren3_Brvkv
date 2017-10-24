@@ -27,9 +27,6 @@ public class Main {
 	private void start() {
 		userInput();
 
-		// Liste der Studenten und alle ihren Attributen auf die Konsole
-		// schreiben
-		// printList(studentenliste);
 	}
 
 	private void bakeAStudent() {
@@ -48,7 +45,11 @@ public class Main {
 		System.out.println("[2] print students to console");
 		if (studentenliste.size() > 0) {
 			System.out.println("[3] add Fach to student");
+			System.out.println("[4] print students with same Fach");
+		} else {
+			System.out.println("[3] print students with same Fach");
 		}
+
 		System.out.println("[0] quit program");
 	}
 
@@ -74,27 +75,55 @@ public class Main {
 				userInput();
 				break;
 			case 3:
-				System.out.println("Choose student");
 				do {
+					System.out.println("Choose student");
 					printList(studentenliste);
 					choice = scanner.nextInt();
+				} while (choice < 1 || choice > studentenliste.size());
+				// welchen kurs soll er wählen?
+				studentenliste.get(choice - 1).addFach();
 
-					studentenliste.get(choice - 1).addFach();
-					// welchen kurs soll er wählen?
-
-				} while (choice < 0 || choice > studentenliste.size());// Noch
-																		// abfangen,
-																		// dass
-																		// es
-																		// vom
-																		// Typ
-																		// int
-																		// sein
-																		// muss!
 				userInput();
+				break;
+			case 4:
+
+				/**
+				 * Frage User nach welchem Studiengang gesucht werden soll via
+				 * enum_Studiengang.getList() User scuht via Scanner aus und
+				 * studentenliste wird einmal durchgelaufen und wenn treffer,
+				 * dann auf Konsole.
+				 */
+
+				do {
+					System.out.println("Nach welchem Studiengang soll gelistet werden?");
+					enum_Studiengang.printStudiengangList();
+					choice = scanner.nextInt();
+
+				} while (choice < 1 || choice > enum_Studiengang.getList().size());
+
+				String studiengang = enum_Studiengang.getList().get(choice - 1).toString();
+
+				printStudentsWithSpecificCourse(studiengang);
+
 				break;
 			}
 		} while (choice < 0 || choice > 3);
+	}
+
+	/**
+	 * prints all students with the given course of studies
+	 * 
+	 * @param searchTerm
+	 */
+	private void printStudentsWithSpecificCourse(String searchTerm) {
+
+		for (Student s : this.studentenliste) {
+			for (int i = 0; i < s.getFaecher_list().size(); i++) {
+				if (s.getFaecher_list().get(i).getStudiengang().name().contentEquals(searchTerm)) {
+					System.out.println(s.toString());
+				}
+			}
+		}
 
 	}
 

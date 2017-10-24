@@ -6,20 +6,37 @@ public class Fach {
 	private int semester;
 	private enum_Kursname k_name;
 	private enum_Studiengang studiengang;
+	
 
+	/**
+	 * default Constructor
+	 */
 	public Fach(int semester, enum_Kursname k_name, enum_Studiengang studiengang) {
 		this.semester = semester;
 		this.k_name = k_name;
 		this.studiengang = studiengang;
 	}
 
-	/**
-	 * default Constructor
-	 */
 	public Fach() {
-		this.addStudiengang();
+		
+		if(this.getStudiengang() == null) {
+			this.addStudiengang();
+			
+		}
 		this.addSemester();
 		this.addKurs();
+	}
+
+	public void setSemester(int semester) {
+		this.semester = semester;
+	}
+
+	public void setK_name(enum_Kursname k_name) {
+		this.k_name = k_name;
+	}
+
+	public void setStudiengang(enum_Studiengang studiengang) {
+		this.studiengang = studiengang;
 	}
 
 	/**
