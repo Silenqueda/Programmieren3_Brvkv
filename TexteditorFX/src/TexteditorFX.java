@@ -1,8 +1,14 @@
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.text.Highlighter.HighlightPainter;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Menu;
@@ -10,13 +16,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 //TODO: bei Checkbox!
-
 
 public class TexteditorFX extends Application {
 
@@ -35,6 +41,7 @@ public class TexteditorFX extends Application {
 	// Variable holds search element
 	String searchElement;
 
+	// MAIN
 	public static void main(String[] args) {
 		launch(args);
 
@@ -96,8 +103,11 @@ public class TexteditorFX extends Application {
 		});
 
 		// Textarea
+		// Passt Width und Height dynamisch an die Größe des Windows an
 		textArea = new TextArea();
 		textArea.setWrapText(true); // Zeilenumbruch
+		textArea.prefWidthProperty().bind(primaryStage.widthProperty());
+		textArea.prefHeightProperty().bind(primaryStage.heightProperty());
 		vbox = new VBox();
 		vbox.getChildren().add(textArea);
 		root.setCenter(vbox);
@@ -125,19 +135,22 @@ public class TexteditorFX extends Application {
 		BorderPane sec_window = new BorderPane();
 
 		TextArea suchText = new TextArea();
-		textArea.setWrapText(true); // Zeilenumbruch
+		suchText.setWrapText(true); // Zeilenumbruch
 		vbox = new VBox();
-		vbox.getChildren().add(textArea);
+		vbox.getChildren().add(suchText);
 
 		// Checkbox - checked/true -> case sensitive
 		CheckBox chb_CaseSensitive = new CheckBox();
+		// chb_CaseSensitive.
 
 		// Button - OK
 		Button b_ok = new Button("OK");
 		b_ok.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				suchText.getText();
+				searchElement = suchText.getText();
+				checkForSearchElement(searchElement);
+
 			}
 		});
 
@@ -163,6 +176,36 @@ public class TexteditorFX extends Application {
 		newWindow.setScene(sec_scene);
 
 		newWindow.show();
+	}
+
+	private void checkForSearchElement(String s) {
+		// TODO:
+		// Liste hält alle offsets von allen Suchelementen.
+		List<Integer> list = new ArrayList<Integer>();
+
+		String textareaText = textArea.getText();
+
+		int offset = 0;
+		int wordlength = s.length();
+		int length = 0;
+
+		if (textareaText.contains(s)) {
+			// TODO : Was passiert wenn mehrere Stellen gefunden wurden? ->
+			// evtl Treffer Liste erzeugen
+
+			offset = textareaText.indexOf(s);
+			length = offset + wordlength;
+
+			textArea.selectRange(offset, length);
+
+		} else {
+			// TODO: evtl neues Fenster mit Alert-Nachricht
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Info");
+			alert.setContentText("Suchelement wurde nicht gefunden.");
+			alert.showAndWait();
+		}
+
 	}
 
 }
